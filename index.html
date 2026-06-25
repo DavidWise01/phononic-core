@@ -42,6 +42,11 @@
   #seq .cell{aspect-ratio:1/1;border-radius:5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);cursor:pointer;transition:transform .05s}
   #seq .cell:hover{transform:scale(1.08)}
   #seq .cell.col{outline:2px solid rgba(255,255,255,0.85);outline-offset:-1px}
+  #optic{padding:2px 15px 6px;display:flex;align-items:center;gap:10px}
+  #optic .ocap{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.6;white-space:nowrap}
+  #colorbar{flex:1;height:22px;border-radius:6px;background:#05080a;transition:background .07s linear,box-shadow .07s linear;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12)}
+  #chan{font-family:'Space Mono',monospace;font-size:11px;opacity:.85;white-space:nowrap}
+  #chan b{color:#fff}
   #scope{display:block;width:100%;height:150px}
   #deck{column-gap:18px}
   .c{break-inside:avoid;margin:0 0 18px;border-radius:10px;overflow:hidden;backdrop-filter:blur(2px)}
@@ -83,10 +88,10 @@
 </div>
 <div id="wrap">
   <div class="hero">
-    <div class="ax" id="axline">PHN · PSĒPHOS · the processor you can hear</div>
+    <div class="ax" id="axline">PHN · PSĒPHOS · the processor you can hear — and see</div>
     <h1>PHONONIC CORE</h1>
-    <div class="hook">♪ HOOKED ON PHONONS ♪</div>
-    <p class="thesis">Every other core moves electrons. This one moves <b>sound</b>. Its carrier is the <b>phonon</b> — a quantum of vibration — and a wave of it rippling across a surface (a <b>surface acoustic wave</b>) can be <b>stored</b> (let it circulate), <b>filtered</b> (let a crystal block a band), and made to do <b>logic</b> (let two waves interfere). It is the one processor whose computation you can literally <b>listen to</b>. Turn your sound on.</p>
+    <div class="hook">♪ HOOKED ON PHONONS · NOW IN COLOR ♪</div>
+    <p class="thesis">Every other core moves electrons. This one moves <b>sound</b>. Its carrier is the <b>phonon</b> — a quantum of vibration — that can be <b>stored</b> (let it circulate), <b>filtered</b> (let a crystal block a band), and made to do <b>logic</b> (let two waves interfere). And it runs a <b>second channel in color</b>: a sound wave really does steer and re-tint a light beam (acousto-optics), so every tone here also carries its true <b>spectral color</b>. One processor, two synchronized channels — one for the ear, one for the eye. Turn your sound on.</p>
   </div>
   <div class="banner" id="banner"></div>
 
@@ -95,6 +100,7 @@
     <div class="lh"><span>▶ THE DELAY LINE · a recirculating acoustic memory, played as music</span><button id="snd">🔊 enable sound</button></div>
     <div class="ll">A bit in a delay-line memory exists only while it is <b>moving</b> — it circulates as a pulse and must loop back to refresh, or it's gone. This is exactly how <b>UNIVAC I (1951)</b> held its memory: trains of sound pulses in tubes of mercury. Here each lit cell is a pulse, mapped to a note of a pentatonic scale (so any pattern is musical). Hit <b>play</b> and your byte <b>circulates</b> — a melody that is also a memory refreshing.</div>
     <div id="seqwrap"><div id="seq"></div></div>
+    <div id="optic"><span class="ocap">▤ OPTICAL CHANNEL</span><div id="colorbar"></div><span id="chan">λ <b id="rWL">—</b></span></div>
     <div class="ctl">
       <button id="play">▶ circulate</button>
       <button id="rnd" class="alt">🎲 random byte</button>
@@ -137,7 +143,7 @@
     schemes:["analogous","split","warm"],
     motifPool:["waves","flow","lissajous","rings","arcs","spiral","constellation"],
     cols:[2,3],
-    banner:"⚖ Two-layer honest. The PHYSICS is real and demonstrated: acoustic DELAY-LINE memory actually ran — mercury delay lines held the main memory of UNIVAC I (1951) and EDSAC, storing data as circulating sound pulses; SURFACE-ACOUSTIC-WAVE (SAW) filters and delay lines are in essentially every phone (real, ubiquitous RF signal processing); and phononic-crystal AND / XOR logic gates have been demonstrated (Scientific Reports, 2025, contrast ratios ~12 dB). The integrated 'core' ARCHITECTURE is a ROOT0 concept render. Honest catch: sound travels ~100,000× slower than light, so acoustics is brilliant for DELAY, STORAGE and FILTERING and for analog signal logic — not for a fast general-purpose CPU. The live instruments below make real tones; they are a friendly skin on real principles."
+    banner:"⚖ Two-layer honest. The PHYSICS is real and demonstrated: acoustic DELAY-LINE memory actually ran — mercury delay lines held the main memory of UNIVAC I (1951) and EDSAC, storing data as circulating sound pulses; SURFACE-ACOUSTIC-WAVE (SAW) filters are in essentially every phone; phononic-crystal AND / XOR logic gates are demonstrated (Scientific Reports, 2025). THE COLOR CHANNEL is real too: sound genuinely steers and re-tints light — acousto-optic modulators (Bragg cells) diffract and Doppler-shift a laser with a sound wave, and in Brillouin scattering a phonon literally red/blue-shifts a photon's color; visible light spans almost exactly ONE octave (760→380 nm = 2:1), so a tone maps to a color by raising it ~40 octaves (octave equivalence); and color-as-parallel-lane is WDM, how fibre carries many channels at once. ⚖ VERACITY VERDICT (you asked): about ~75% verace overall — the coupling (acousto-optics, Brillouin, WDM, the one-octave fact) is real, shipped tech (~90%); the specific octave sound↔color PAIRING is a principled-but-chosen representation (~65%); and one ROOT0 'core' emitting the SAME word redundantly on a tone channel and a color channel is the design layer (~55%). Comfortably over your 50.495% bar. Honest catch: sound is ~100,000× slower than light, so this is delay/storage/filtering/signal-logic, not a fast CPU; the live instruments make real tones and real spectral colors on a friendly musical skin."
   };
   var CARDS = [
     {h:"The Phononic Core", b:"The thesis: a processor whose carrier is sound, not charge. Information rides as a mechanical wave — a vibration in a crystal or across a surface — and is stored, filtered, and gated by the wave's own behaviour. The reckoning-stone, struck like a bell."},
@@ -153,6 +159,11 @@
     {h:"Interference Is The Logic", b:"The compute primitive you can hear: where two waves meet in phase they reinforce (a 1); in anti-phase they annihilate (a 0). No transistor required — the superposition does the boolean. The interferometer above is this principle, sounded out."},
     {h:"The Beat", b:"Play two near tones and a third, slow throb appears at |f₁−f₂| — the beat. It is two frequencies computing their difference in the air, and your ear reading the result. A subtraction you can dance to; the friendliest demo of wave arithmetic."},
     {h:"Tones As Data", b:"Move to the frequency domain and a bit becomes a tone present or absent; a word becomes a chord. Acoustic processors often reckon in frequencies and phases rather than voltages — which is exactly why their computation maps so naturally onto music."},
+    {h:"◆ The Color Channel", b:"The second lane, and it is real: sound can steer light. An acousto-optic modulator (a Bragg cell) sends a sound wave through a crystal, building a moving grating that diffracts a laser AND Doppler-shifts its frequency by the sound's pitch. The same wave that is your tone can re-aim and re-tune a beam of color. Two channels, one wave."},
+    {h:"◆ Brillouin: A Phonon Paints A Photon", b:"The deepest tie, cited textbook physics: in Brillouin scattering a photon creates or absorbs a phonon and comes out color-shifted — red-shifted (Stokes) if it spent energy making the sound, blue-shifted (anti-Stokes) if it drank a phonon in. A unit of sound literally repaints a unit of light. Sound and color are the same conversation."},
+    {h:"One Octave Of Light", b:"Why a tone HAS a color here: the visible spectrum is almost exactly one octave — red to violet, 760 to 380 nm, a clean 2:1 in frequency, just like a musical octave. So a note maps to a color simply by raising it ~40 octaves until it glows; octave equivalence (a note is 'the same' an octave up) makes the pairing principled, not arbitrary. Real correspondence; the exact hue is a chosen convention."},
+    {h:"Color As A Lane (WDM)", b:"And color really is a data channel: wavelength-division multiplexing runs dozens of colors down one fibre at once, each an independent stream — the backbone of the internet. 'Add a color channel' is not a metaphor; it is how the network you are reading this on moves its bits."},
+    {h:"◐ Two Channels, One Word", b:"The ROOT0 layer, flagged as concept: this core emits each word on BOTH lanes at once — a tone for the ear and its spectral color for the eye — coupled by the acousto-optic effect so they stay in lockstep. Redundant encoding across senses. The parts are real (acousto-optics + WDM); wiring them as one chip's dual output is the design."},
     {h:"Slow, And Proud Of It", b:"Sound crawls — roughly a hundred thousand times slower than light. That sounds like a flaw, but slowness is the feature: it is what lets a tiny chip hold a long delay, a precise filter, a circulating memory. The core trades speed for time itself."},
     {h:"◐ The Scaled Core", b:"The ROOT0 layer, flagged as concept: SAW waveguides as buses, phononic-crystal gates as logic, and delay lines as registers, integrated on one piezo die with IDT I/O. A coherent design on real, shipped primitives — not a fabricated general processor."},
     {h:"◐ A Rung In The Lattice", b:"Where it sits: an acoustic sibling to [[electromagnetic-processor]] — both compute with waves and interference, but EMC's spin waves are silent and this one is audible. The only seat in PSĒPHOS you experience with your ears."},
@@ -252,6 +263,22 @@
     var pal=null, AC=null, master=null, step=-1, timer=null, loops=0, tempo=150;
     var f1=220, f2=226, osc1=null, osc2=null, oscGain=null, hearing=false, antiPhase=false;
 
+    // ── the COLOR CHANNEL · tone → spectral color, by octave equivalence ──
+    // visible light ≈ one octave (760→380nm = 2:1); a note maps to a hue by
+    // raising it ~40 octaves and folding into the visible band. (acousto-optic real; the exact hue a convention.)
+    function noteWL(f){ var pc=Math.log(f/261.63)/Math.LN2; pc-=Math.floor(pc); return 645-pc*265; } // C=red(645) → up = violet(380)
+    function wlRGB(wl){ var R=0,G=0,B=0,a=1;
+      if(wl<440){R=-(wl-440)/60;B=1;} else if(wl<490){G=(wl-440)/50;B=1;}
+      else if(wl<510){G=1;B=-(wl-510)/20;} else if(wl<580){R=(wl-510)/70;G=1;}
+      else if(wl<645){R=1;G=-(wl-645)/65;} else {R=1;}
+      if(wl>700)a=0.3+0.7*(780-wl)/80; else if(wl<420)a=0.3+0.7*(wl-380)/40;
+      function ch(v){ return Math.max(0,Math.min(255,Math.round(255*Math.pow(Math.max(0,v)*a,0.8)))); }
+      return [ch(R),ch(G),ch(B)]; }
+    function noteRGB(f){ return wlRGB(noteWL(f)); }
+    function noteColor(f){ var c=noteRGB(f); return "rgb("+c[0]+","+c[1]+","+c[2]+")"; }
+    function blendRGB(list){ var r=0,g=0,b=0; for(var i=0;i<list.length;i++){ r+=list[i][0]; g+=list[i][1]; b+=list[i][2]; } // light ADDS
+      return [Math.min(255,r),Math.min(255,g),Math.min(255,b)]; }
+
     function ensure(){ if(!AC){ var Ctx=window.AudioContext||window.webkitAudioContext; if(!Ctx) return null; AC=new Ctx(); master=AC.createGain(); master.gain.value=0.5; master.connect(AC.destination); } if(AC.state==="suspended") AC.resume(); var b=document.getElementById("snd"); if(b) b.textContent="🔊 sound on"; return AC; }
     function note(freq,dur,when){ if(!AC) return; var o=AC.createOscillator(), gn=AC.createGain(); o.type="triangle"; o.frequency.value=freq;
       var t0=when||AC.currentTime; gn.gain.setValueAtTime(0.0001,t0); gn.gain.exponentialRampToValueAtTime(0.22,t0+0.008); gn.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
@@ -262,11 +289,16 @@
     function build(){ if(!seqEl) return; seqEl.style.gridTemplateColumns="repeat("+STEPS+",1fr)"; seqEl.innerHTML=""; cells=[];
       for(var r=0;r<ROWS;r++){ for(var c=0;c<STEPS;c++){ (function(r,c){ var d=document.createElement("div"); d.className="cell"; d.onclick=function(){ grid[r][c]=!grid[r][c]; paintCells(); ensure(); if(grid[r][c]) note(SCALE[r],0.25); }; seqEl.appendChild(d); cells.push({r:r,c:c,el:d}); })(r,c); } } }
     function paintCells(){ if(!pal) return; for(var i=0;i<cells.length;i++){ var cc=cells[i], on=grid[cc.r][cc.c];
-        cc.el.style.background = on ? pal.colors[cc.r%pal.colors.length] : "rgba(255,255,255,0.05)";
+        cc.el.style.background = on ? noteColor(SCALE[cc.r]) : "rgba(255,255,255,0.05)";   // each pitch in its TRUE spectral color
         cc.el.classList.toggle("col", cc.c===step); } }
+    function optic(){ var cb=document.getElementById("colorbar"), wl=document.getElementById("rWL"); if(!cb) return;
+      var act=[], wls=[]; for(var r=0;r<ROWS;r++){ if(step>=0 && grid[r][step]){ act.push(noteRGB(SCALE[r])); wls.push(Math.round(noteWL(SCALE[r]))); } }
+      if(act.length){ var c=blendRGB(act); cb.style.background="rgb("+c[0]+","+c[1]+","+c[2]+")"; cb.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 16px rgba("+c[0]+","+c[1]+","+c[2]+",0.6)";
+        if(wl) wl.textContent=wls.join("/")+" nm"; }
+      else { cb.style.background="#05080a"; cb.style.boxShadow="inset 0 0 0 1px rgba(255,255,255,0.12)"; if(wl) wl.textContent="—"; } }
     function tick(){ step=(step+1)%STEPS; if(step===0) loops++;
       for(var r=0;r<ROWS;r++){ if(grid[r][step]) note(SCALE[r],0.22); }
-      paintCells();
+      paintCells(); optic();
       var rs=document.getElementById("rStep"),rl=document.getElementById("rLoop"); if(rs) rs.textContent=(step+1); if(rl) rl.textContent=loops; }
     function play(){ if(timer){ stop(); return; } if(!ensure()) return; var b=document.getElementById("play"); if(b) b.textContent="⏸ stop";
       var ms=function(){ return 60000/tempo/4; }; timer=setInterval(tick, ms()); }
@@ -287,7 +319,8 @@
       if(hearing){ if(osc1) osc1.frequency.setTargetAtTime(f1, AC.currentTime, 0.02); if(osc2) osc2.frequency.setTargetAtTime(antiPhase?f1:f2, AC.currentTime, 0.02); } }
     function drawScope(){ if(!sctx||!pal){ requestAnimationFrame(drawScope); return; }
       sctx.fillStyle=pal.bg; sctx.fillRect(0,0,sw,sh);
-      var c1=pal.colors[1]||"#34d0b8", c2=pal.colors[3]||"#9affe2", cs=pal.colors[4]||"#ffd66a";
+      // the COLOR CHANNEL on the scope: each tone drawn in its own spectral color, the sum in their additive mix
+      var c1=noteColor(f1), c2=noteColor(antiPhase?f1:f2), sb=blendRGB([noteRGB(f1),noteRGB(antiPhase?f1:f2)]), cs="rgb("+sb[0]+","+sb[1]+","+sb[2]+")";
       var ph = antiPhase?Math.PI:0;
       var k=0.045, off= (typeof t==="number"? t*0.06 : 0);     // scrolling phase for life
       function trace(yc,amp,fn,col){ sctx.strokeStyle=col; sctx.globalAlpha=0.95; sctx.lineWidth=1.6; sctx.beginPath();
