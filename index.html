@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="THE PHONONIC CORE (PHN) — 'Hooked on Phonons' — a UD0 PSĒPHOS sphere rendered by the THEMED CHAOS ENGINE. A tone-based acoustic processor you can HEAR: it computes with sound — phonons, surface acoustic waves, interference — instead of charge. Live in-page with real Web Audio: a RECIRCULATING DELAY-LINE sequencer (your bits play as a looping riff — the mercury-delay-line memory of UNIVAC I, 1951, made musical) and a BEAT INTERFEROMETER (two tones interfere; the beat you hear is the compute primitive). Two-layer honest: the physics is real and demonstrated (acoustic delay-line memory actually ran in UNIVAC I; SAW filters are in every phone; phononic-crystal AND/XOR logic gates have been demonstrated); the integrated 'core' is a ROOT0 concept render; sound is slow, so this is storage/filtering/logic, not a fast general CPU. David Lee Wise, ROOT0.">
+<title>THE PHONONIC CORE · PHN · Hooked on Phonons · PSĒPHOS · UD0</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%2334d0b8' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M10 32 Q19 12 28 32 T46 32'/%3E%3C/g%3E%3Ccircle cx='52' cy='32' r='4' fill='%23ffd66a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%}
+  body{background:#04100d;color:#e6fff6;font-family:'Newsreader',serif;overflow-x:hidden}
+  #bg{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+  #scrim{position:fixed;inset:0;z-index:1;pointer-events:none}
+  #wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:64px 20px 70px}
+  .hero{text-align:center;margin:18px 0 22px}
+  .ax{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:3px;opacity:.8}
+  .hero h1{font-family:'Press Start 2P',monospace;font-size:clamp(20px,5.8vw,52px);line-height:1.18;margin:14px 0 6px;letter-spacing:2px}
+  .hook{font-family:'Press Start 2P',monospace;font-size:clamp(9px,2vw,13px);letter-spacing:1px;margin:8px 0 2px;opacity:.9}
+  .thesis{font-size:clamp(15px,2.1vw,22px);font-weight:300;max-width:740px;margin:12px auto 0;line-height:1.5}
+  .thesis b{font-weight:600}
+  .banner{font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.7;max-width:840px;margin:20px auto 22px;
+    padding:13px 17px;border-radius:9px;text-align:left}
+  /* audio labs */
+  .lab{max-width:880px;margin:0 auto 20px;border-radius:12px;overflow:hidden;backdrop-filter:blur(2px)}
+  .lab .lh{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.5px;padding:11px 15px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .lab .ll{font-size:14px;font-weight:300;line-height:1.5;padding:6px 15px 8px;opacity:.92}
+  .lab .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:8px 15px 14px;font-family:'Space Mono',monospace;font-size:12px}
+  .lab .ctl button{font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;color:#04100d;
+    background:#34d0b8;border:none;border-radius:6px;padding:5px 12px;font-weight:700}
+  .lab .ctl button:hover{filter:brightness(1.12)}
+  .lab .ctl button.alt{background:#ffd66a}
+  .lab .ctl input[type=range]{width:120px;accent-color:#34d0b8;vertical-align:middle}
+  .lab .rd{opacity:.9}.lab .rd b{color:#9affe2}
+  .lab .lg{font-size:11px;opacity:.6;padding:0 15px 13px;font-family:'Space Mono',monospace;line-height:1.6}
+  #snd{font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;color:#04100d;background:#ffd66a;border:none;border-radius:6px;padding:4px 12px;font-weight:700}
+  #seqwrap{padding:8px 15px 4px}
+  #seq{display:grid;gap:4px}
+  #seq .cell{aspect-ratio:1/1;border-radius:5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);cursor:pointer;transition:transform .05s}
+  #seq .cell:hover{transform:scale(1.08)}
+  #seq .cell.col{outline:2px solid rgba(255,255,255,0.85);outline-offset:-1px}
+  #scope{display:block;width:100%;height:150px}
+  #deck{column-gap:18px}
+  .c{break-inside:avoid;margin:0 0 18px;border-radius:10px;overflow:hidden;backdrop-filter:blur(2px)}
+  .c .cv{display:block;width:100%;height:64px}
+  .c .bd{padding:13px 15px 15px}
+  .c h3{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.4px;margin:0 0 7px;line-height:1.3}
+  .c p{font-size:15px;font-weight:300;line-height:1.5;opacity:.95}
+  .c .ini{float:left;font-family:'Press Start 2P',monospace;font-size:26px;line-height:.8;margin:2px 9px 2px 0}
+  .c .tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.6;margin-top:9px;display:block}
+  footer{text-align:center;font-family:'Space Mono',monospace;font-size:11px;opacity:.6;margin-top:30px;line-height:1.8}
+  footer a{color:inherit}
+  #bar{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+    padding:7px 12px;font-family:'Space Mono',monospace;font-size:12px;
+    background:rgba(4,16,13,.86);color:#dcfff2;backdrop-filter:blur(7px);border-bottom:1px solid rgba(60,210,180,.3)}
+  #bar b{letter-spacing:1.5px}
+  #bar button{font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;color:#dcfff2;
+    background:rgba(50,200,170,.22);border:1px solid rgba(80,220,190,.5);border-radius:6px;padding:3px 10px}
+  #bar button:hover{background:rgba(50,200,170,.46)}
+  #bar a{color:#7fe9d2;text-decoration:none;border-bottom:1px dotted #4a9e8c}
+  #bar a:hover{color:#fff}
+  #read{opacity:.7;font-size:11px}
+  #sig{margin-left:auto;opacity:.5;font-size:10px}
+  @media(max-width:640px){#sig{display:none}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="scrim"></div>
+<div id="bar">
+  <b>⟲ THEMED CHAOS ENGINE</b>
+  <button id="reroll">🎲 reroll</button>
+  <button id="perma">⧉ permalink</button>
+  <button id="motion">⏸ motion</button>
+  <span id="read"></span>
+  <a href="https://davidwise01.github.io/ud0/">◄ UD0</a>
+  <a href="https://davidwise01.github.io/electromagnetic-processor/">EMC ↗</a>
+  <a href="https://davidwise01.github.io/skyrmionic-core/">SKY ↗</a>
+  <span id="sig">ROOT0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0</span>
+</div>
+<div id="wrap">
+  <div class="hero">
+    <div class="ax" id="axline">PHN · PSĒPHOS · the processor you can hear</div>
+    <h1>PHONONIC CORE</h1>
+    <div class="hook">♪ HOOKED ON PHONONS ♪</div>
+    <p class="thesis">Every other core moves electrons. This one moves <b>sound</b>. Its carrier is the <b>phonon</b> — a quantum of vibration — and a wave of it rippling across a surface (a <b>surface acoustic wave</b>) can be <b>stored</b> (let it circulate), <b>filtered</b> (let a crystal block a band), and made to do <b>logic</b> (let two waves interfere). It is the one processor whose computation you can literally <b>listen to</b>. Turn your sound on.</p>
+  </div>
+  <div class="banner" id="banner"></div>
+
+  <!-- LAB 1: recirculating delay-line memory, as music -->
+  <div class="lab" id="lab1">
+    <div class="lh"><span>▶ THE DELAY LINE · a recirculating acoustic memory, played as music</span><button id="snd">🔊 enable sound</button></div>
+    <div class="ll">A bit in a delay-line memory exists only while it is <b>moving</b> — it circulates as a pulse and must loop back to refresh, or it's gone. This is exactly how <b>UNIVAC I (1951)</b> held its memory: trains of sound pulses in tubes of mercury. Here each lit cell is a pulse, mapped to a note of a pentatonic scale (so any pattern is musical). Hit <b>play</b> and your byte <b>circulates</b> — a melody that is also a memory refreshing.</div>
+    <div id="seqwrap"><div id="seq"></div></div>
+    <div class="ctl">
+      <button id="play">▶ circulate</button>
+      <button id="rnd" class="alt">🎲 random byte</button>
+      <button id="wipe" class="alt">∅ wipe</button>
+      <label>tempo <input id="tempo" type="range" min="60" max="260" value="150"></label>
+      <span class="rd">step <b id="rStep">—</b>/16</span>
+      <span class="rd">refreshes <b id="rLoop">0</b></span>
+    </div>
+    <div class="lg">Rows are pitches (low→high), columns are time. The white outline is the read head sweeping the loop — the recirculation. Stop refreshing and the pattern would, in a real delay line, decay to silence: volatile by nature, the price of storing data as motion. A step sequencer IS a recirculating shift register. (Real principle; the music is the friendly skin.)</div>
+  </div>
+
+  <!-- LAB 2: interference / beats = the logic primitive -->
+  <div class="lab" id="lab2">
+    <div class="lh"><span>≈ THE INTERFEROMETER · two tones, and the beat between them</span></div>
+    <div class="ll">Acoustic logic is built on <b>interference</b>: two waves in phase add (a loud <code>1</code>); two waves in anti-phase cancel (a silent <code>0</code>). Slide the two frequencies apart and you hear a third, slow pulse — the <b>beat</b>, at |f₁−f₂| Hz — the audible signature of waves computing a sum. Demonstrated phononic-crystal gates do exactly this with surface waves.</div>
+    <canvas id="scope"></canvas>
+    <div class="ctl">
+      <button id="hear">▶ hear both</button>
+      <button id="cancel" class="alt">⊘ anti-phase (cancel → 0)</button>
+      <label>f₁ <input id="f1" type="range" min="160" max="480" value="220"></label>
+      <label>f₂ <input id="f2" type="range" min="160" max="480" value="226"></label>
+      <span class="rd">beat <b id="rBeat">6</b> Hz</span>
+    </div>
+    <div class="lg">Top trace = wave 1, middle = wave 2, bottom = their sum (what the ear and a detector actually receive). When f₁=f₂ and you flip the phase, the sum flattens to a line — destructive interference, a logical 0 made of silence. This is the compute primitive; the delay line above is the memory.</div>
+  </div>
+
+  <div id="deck"></div>
+  <footer>
+    THE PHONONIC CORE · PHN · ♪ Hooked on Phonons ♪ · PSĒPHOS · the themed chaos engine · catalogued into UD0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0<br>
+    <a href="https://davidwise01.github.io/ud0/">← the biosphere</a> · <a href="https://davidwise01.github.io/electromagnetic-processor/">the Electromagnetic Core (also a wave, but silent) →</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var THEME = {
+    title:"PHONONIC CORE", ax:"PHN", unify:"the processor you can hear",
+    hue:168, hueJit:46, dark:true, sat:[52,84],
+    schemes:["analogous","split","warm"],
+    motifPool:["waves","flow","lissajous","rings","arcs","spiral","constellation"],
+    cols:[2,3],
+    banner:"⚖ Two-layer honest. The PHYSICS is real and demonstrated: acoustic DELAY-LINE memory actually ran — mercury delay lines held the main memory of UNIVAC I (1951) and EDSAC, storing data as circulating sound pulses; SURFACE-ACOUSTIC-WAVE (SAW) filters and delay lines are in essentially every phone (real, ubiquitous RF signal processing); and phononic-crystal AND / XOR logic gates have been demonstrated (Scientific Reports, 2025, contrast ratios ~12 dB). The integrated 'core' ARCHITECTURE is a ROOT0 concept render. Honest catch: sound travels ~100,000× slower than light, so acoustics is brilliant for DELAY, STORAGE and FILTERING and for analog signal logic — not for a fast general-purpose CPU. The live instruments below make real tones; they are a friendly skin on real principles."
+  };
+  var CARDS = [
+    {h:"The Phononic Core", b:"The thesis: a processor whose carrier is sound, not charge. Information rides as a mechanical wave — a vibration in a crystal or across a surface — and is stored, filtered, and gated by the wave's own behaviour. The reckoning-stone, struck like a bell."},
+    {h:"Hooked On Phonons", b:"The pun is the point. Phonics teaches you to hear the units of speech; this core hears the units of computation. Every operation it performs is a sound you could, in principle, play through a speaker. Reading, for a machine, by ear."},
+    {h:"The Phonon", b:"A phonon is a quantum of vibration — sound chopped into discrete packets, the acoustic cousin of the photon. It is how heat and sound actually move through a solid: as a gas of these vibrational quanta. The bit, here, is a ripple made countable."},
+    {h:"◆ The Mercury Delay Line", b:"The real anchor, cited: the main memory of UNIVAC I (1951) — and of EDSAC — was a column of mercury with a quartz crystal at each end. Data circulated as trains of sound pulses, read out at the far end and pumped back in. Acoustic memory that genuinely ran a computer."},
+    {h:"Memory As Motion", b:"A delay line stores a bit only while it travels: send a pulse, and it represents a 1 for the milliseconds it takes to cross. To keep it you must catch it at the end and re-inject it — refresh, or forget. Information you have to keep in motion to keep at all."},
+    {h:"◆ SAW Filters", b:"The everyday descendant, cited: surface-acoustic-wave devices are in essentially every phone. An electrical signal is turned into a wave that ripples across a piezoelectric chip and back, shaping frequencies with a precision hard to match electrically. The most successful acoustic processor ever shipped."},
+    {h:"The IDT", b:"The interdigital transducer: two interlocking combs of metal on a piezo surface. Apply a voltage and the combs squeeze the crystal into a travelling wave; catch the wave with another comb and read a voltage. The translator between volts and vibration — the core's I/O."},
+    {h:"Piezoelectricity", b:"The bridge that makes all of it possible: in a piezoelectric crystal, voltage becomes strain and strain becomes voltage. It is how electronics speaks to sound and listens back — the same effect in your quartz watch, your microphone, and every SAW chip."},
+    {h:"◆ Phononic Crystal Gates", b:"Logic, demonstrated, cited: a phononic crystal — a lattice patterned to steer sound — can be built into AND and XOR gates for acoustic waves (Scientific Reports, 2025), with clean on/off contrast (~12 dB). The crystal itself performs the boolean operation on the tones."},
+    {h:"The Band Gap", b:"A phononic crystal has a forbidden band: a range of frequencies it simply will not transmit, the acoustic twin of a semiconductor's bandgap. Tune the lattice and you tune which tones pass — a filter, a mirror, a waveguide, all from geometry."},
+    {h:"Interference Is The Logic", b:"The compute primitive you can hear: where two waves meet in phase they reinforce (a 1); in anti-phase they annihilate (a 0). No transistor required — the superposition does the boolean. The interferometer above is this principle, sounded out."},
+    {h:"The Beat", b:"Play two near tones and a third, slow throb appears at |f₁−f₂| — the beat. It is two frequencies computing their difference in the air, and your ear reading the result. A subtraction you can dance to; the friendliest demo of wave arithmetic."},
+    {h:"Tones As Data", b:"Move to the frequency domain and a bit becomes a tone present or absent; a word becomes a chord. Acoustic processors often reckon in frequencies and phases rather than voltages — which is exactly why their computation maps so naturally onto music."},
+    {h:"Slow, And Proud Of It", b:"Sound crawls — roughly a hundred thousand times slower than light. That sounds like a flaw, but slowness is the feature: it is what lets a tiny chip hold a long delay, a precise filter, a circulating memory. The core trades speed for time itself."},
+    {h:"◐ The Scaled Core", b:"The ROOT0 layer, flagged as concept: SAW waveguides as buses, phononic-crystal gates as logic, and delay lines as registers, integrated on one piezo die with IDT I/O. A coherent design on real, shipped primitives — not a fabricated general processor."},
+    {h:"◐ A Rung In The Lattice", b:"Where it sits: an acoustic sibling to [[electromagnetic-processor]] — both compute with waves and interference, but EMC's spin waves are silent and this one is audible. The only seat in PSĒPHOS you experience with your ears."},
+    {h:"✓ The Physics Is Real", b:"Delay-line memory ran in UNIVAC I; SAW filters ship by the billion; phononic-crystal logic gates are demonstrated; piezo transduction is textbook. Every primitive — store, filter, gate, transduce — is genuine and, mostly, already in your pocket."},
+    {h:"◐ The Design Is A Concept", b:"The specific integrated 'core' — its bus, its gate fabric, its register file of delay lines — is a speculative render assembled from those real parts. A disclosure of an architecture, not a benchmarked acoustic CPU."},
+    {h:"◔ The Honest Catch", b:"What to not overclaim: acoustics is slow, so this is for delay, memory, filtering and analog/logic signal work — not a fast general CPU; SAW today is analog DSP, not boolean computing; and the gate demos are small lab devices. Real, useful, bounded."},
+    {h:"Why You Can Hear It", b:"The synthesis: strip computing back to a wave and a medium, and the medium can be air. A processor made of tones stores its data as melody, gates it by harmony, and reads it by ear. Hooked on phonons — the reckoning-stone you can play."}
+  ];
+
+  function xmur3(s){ for(var i=0,h=1779033703^s.length;i<s.length;i++){ h=Math.imul(h^s.charCodeAt(i),3432918353); h=h<<13|h>>>19; } return function(){ h=Math.imul(h^h>>>16,2246822507); h=Math.imul(h^h>>>13,3266489909); return (h^=h>>>16)>>>0; }; }
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function rngFrom(s){ var x=xmur3(s); return mulberry32(x()); }
+  function pick(R,a){ return a[Math.floor(R()*a.length)]; }
+  function hsl(h,s,l,a){ return "hsla("+((h%360+360)%360)+","+s+"%,"+l+"%,"+(a===undefined?1:a)+")"; }
+
+  function palette(R){
+    var base=THEME.hue+Math.floor((R()-0.5)*THEME.hueJit), scheme=pick(R,THEME.schemes);
+    var sat=THEME.sat[0]+Math.floor(R()*(THEME.sat[1]-THEME.sat[0])), offs;
+    if(scheme==="analogous") offs=[-34,-16,0,18,38];
+    else if(scheme==="split") offs=[0,-26,26,-46,46];
+    else offs=[0,16,34,-14,50];
+    var colors=offs.map(function(d,i){ return hsl(base+d, sat, 52+i*5); });
+    var bgL=THEME.dark?(7+Math.floor(R()*6)):(90+Math.floor(R()*5));
+    return { base:base, scheme:scheme, dark:THEME.dark, sat:sat, colors:colors,
+      bg:hsl(base,THEME.dark?34:18,bgL), ink:hsl(base,THEME.dark?16:32,THEME.dark?90:18),
+      scrim:hsl(base,40,bgL,THEME.dark?0.52:0.40) };
+  }
+
+  function M(name,g,w,h,pal,R,t){
+    var i,n,C=pal.colors,ink=pal.ink; g.lineCap="round";
+    if(name==="rings"){ var cx=w*(0.3+R()*0.4),cy=h*(0.3+R()*0.4),st=8+R()*16; n=Math.floor(Math.min(w,h)/st);
+      for(i=0;i<n;i++){ g.strokeStyle=C[i%C.length]; g.globalAlpha=0.18+0.5*(i/n); g.lineWidth=1+R()*2; g.beginPath(); g.arc(cx,cy,i*st*(1+0.04*Math.sin(t*0.04+i))+6,0,7); g.stroke(); } }
+    else if(name==="spiral"){ var cx2=w/2,cy2=h/2,k=0.5+R()*1.1,pts=200+Math.floor(R()*240),rot=t*0.01;
+      for(i=0;i<pts;i++){ var a=i*0.16+rot,r=k*a*2; if(r>Math.max(w,h))break; g.globalAlpha=0.5; g.fillStyle=C[i%C.length]; g.beginPath(); g.arc(cx2+Math.cos(a)*r,cy2+Math.sin(a)*r,Math.max(0.6,1+Math.sin(i*0.1)),0,7); g.fill(); } }
+    else if(name==="flow"){ var gs=Math.max(20,Math.min(w,h)/14); g.lineWidth=1.5;
+      for(var y=gs*0.5;y<h;y+=gs)for(var x=gs*0.5;x<w;x+=gs){ var an=Math.sin(x*0.012+t*0.02)+Math.cos(y*0.012-t*0.015)+R()*0.3; g.strokeStyle=C[(Math.floor(x/gs)+Math.floor(y/gs))%C.length]; g.globalAlpha=0.5; var L=gs*0.46; g.beginPath(); g.moveTo(x-Math.cos(an)*L,y-Math.sin(an)*L); g.lineTo(x+Math.cos(an)*L,y+Math.sin(an)*L); g.stroke(); } }
+    else if(name==="waves"){ var rows=8+Math.floor(R()*9); g.lineWidth=1.4;
+      for(i=0;i<rows;i++){ g.strokeStyle=C[i%C.length]; g.globalAlpha=0.45; var yy=h*(i+0.5)/rows,amp=h/rows*0.7,ph=R()*6+t*0.03; g.beginPath(); for(var xx=0;xx<=w;xx+=6){ var yv=yy+Math.sin(xx*0.02+ph)*amp*Math.sin(xx*0.003+t*0.01); xx===0?g.moveTo(xx,yv):g.lineTo(xx,yv);} g.stroke(); } }
+    else if(name==="constellation"){ n=34+Math.floor(R()*44); var P=[]; for(i=0;i<n;i++)P.push([R()*w,R()*h]);
+      for(i=0;i<n;i++)for(var j=i+1;j<n;j++){ var dx=P[i][0]-P[j][0],dy=P[i][1]-P[j][1],dd=Math.sqrt(dx*dx+dy*dy); if(dd<Math.min(w,h)*0.17){ g.strokeStyle=ink; g.globalAlpha=0.09+0.05*Math.sin(t*0.05+i); g.lineWidth=1; g.beginPath(); g.moveTo(P[i][0],P[i][1]); g.lineTo(P[j][0],P[j][1]); g.stroke(); } }
+      for(i=0;i<n;i++){ g.fillStyle=C[i%C.length]; g.globalAlpha=0.55+0.4*Math.sin(t*0.06+i); g.beginPath(); g.arc(P[i][0],P[i][1],1.5+R()*2,0,7); g.fill(); } }
+    else if(name==="mandala"){ var cx3=w/2,cy3=h/2,K=6+Math.floor(R()*9),arms=4+Math.floor(R()*6),rr=Math.min(w,h)*0.46;
+      for(var k=0;k<K;k++){ g.save(); g.translate(cx3,cy3); g.rotate(k/K*6.283+t*0.006); g.strokeStyle=C[k%C.length]; g.globalAlpha=0.5; g.lineWidth=1.3; g.beginPath(); for(i=0;i<=arms;i++){ var aa=i/arms,x1=Math.cos(aa)*rr*(0.3+0.7*Math.sin(i+t*0.02)),y1=Math.sin(aa)*rr; i===0?g.moveTo(x1,y1):g.lineTo(x1,y1);} g.stroke(); g.restore(); } }
+    else if(name==="lissajous"){ var a1=1+Math.floor(R()*4),b1=1+Math.floor(R()*4),ph2=R()*6+t*0.02,A=w*0.42,B=h*0.42,cx4=w/2,cy4=h/2; g.lineWidth=1.4;
+      for(var L2=0;L2<C.length;L2++){ g.strokeStyle=C[L2]; g.globalAlpha=0.5; g.beginPath(); for(var th=0;th<=6.30;th+=0.01){ var xv=cx4+Math.sin(a1*th+ph2+L2*0.2)*A,yv=cy4+Math.sin(b1*th+L2*0.3)*B; th===0?g.moveTo(xv,yv):g.lineTo(xv,yv);} g.stroke(); } }
+    else if(name==="arcs"){ var cx5=R()*w,cy5=R()*h; n=10+Math.floor(R()*14);
+      for(i=0;i<n;i++){ g.strokeStyle=C[i%C.length]; g.globalAlpha=0.38; g.lineWidth=2+R()*4; var a0=R()*6+t*0.01,a1b=a0+0.6+R()*2; g.beginPath(); g.arc(cx5,cy5,18+i*Math.max(w,h)/n*0.5,a0,a1b); g.stroke(); } }
+    g.globalAlpha=1;
+  }
+
+  var bg=document.getElementById("bg"), g=bg.getContext("2d"), W=0,H=0, st=null, t=0, running=true;
+  function fit(){ var w=window.innerWidth||document.documentElement.clientWidth||0, h=window.innerHeight||document.documentElement.clientHeight||0; if(w<2)w=1280; if(h<2)h=800; W=bg.width=w; H=bg.height=h; }
+  function shuffle(R,arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(R()*(i+1)); var tmp=a[i]; a[i]=a[j]; a[j]=tmp; } return a; }
+
+  function setup(seed){
+    var R=rngFrom("phononic-core:"+seed);
+    var pal=palette(R), bgM=pick(R,THEME.motifPool), cols=THEME.cols[Math.floor(R()*THEME.cols.length)];
+    if(window.innerWidth<680) cols=1;
+    var order=shuffle(R, CARDS.map(function(_,i){return i;}));
+    var plan=order.map(function(idx,pos){ return { idx:idx, kind:pick(R,["plain","initial","motif","accent","initial","plain"]), motif:pick(R,THEME.motifPool), col:pal.colors[pos%pal.colors.length], seed:Math.floor(R()*1e9) }; });
+    st={seed:seed,pal:pal,bgM:bgM,plan:plan};
+    document.body.style.background=pal.bg;
+    document.getElementById("scrim").style.background=pal.scrim;
+    document.getElementById("wrap").style.color=pal.ink;
+    document.getElementById("read").textContent="theme: PHONONIC CORE — "+THEME.unify+"  ·  motif: "+bgM+"  ·  "+pal.scheme+"  ·  #"+seed;
+    var bn=document.getElementById("banner"); bn.textContent=THEME.banner; bn.style.background=pal.dark?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.05)"; bn.style.border="1px solid "+pal.colors[0]; bn.style.color=pal.ink;
+    ["lab1","lab2"].forEach(function(id){ var l=document.getElementById(id); l.style.background=pal.dark?"rgba(255,255,255,0.045)":"rgba(255,255,255,0.55)"; l.style.border="1px solid "+pal.colors[0]; l.style.color=pal.ink; });
+    var deck=document.getElementById("deck"); deck.style.columnCount=cols; deck.innerHTML="";
+    plan.forEach(function(p){
+      var card=CARDS[p.idx], el=document.createElement("div"); el.className="c";
+      el.style.background=pal.dark?"rgba(255,255,255,0.045)":"rgba(255,255,255,0.55)";
+      el.style.border="1px solid "+(pal.dark?"rgba(255,255,255,0.10)":"rgba(0,0,0,0.10)");
+      if(p.kind==="accent") el.style.borderLeft="4px solid "+p.col;
+      if(p.kind==="motif"){ var cv=document.createElement("canvas"); cv.className="cv"; el.appendChild(cv);
+        requestAnimationFrame(function(){ var rw=cv.clientWidth||300; cv.width=rw; cv.height=64; var cg=cv.getContext("2d"); cg.fillStyle=pal.bg; cg.fillRect(0,0,rw,64); M(p.motif,cg,rw,64,pal,rngFrom("strip:"+p.seed),0); }); }
+      var bd=document.createElement("div"); bd.className="bd";
+      var hh=document.createElement("h3"); hh.textContent=card.h; hh.style.color=p.col; bd.appendChild(hh);
+      var pp=document.createElement("p");
+      if(p.kind==="initial"){ var ini=document.createElement("span"); ini.className="ini"; ini.textContent=card.b.charAt(0); ini.style.color=p.col; pp.appendChild(ini); pp.appendChild(document.createTextNode(card.b.slice(1))); }
+      else pp.textContent=card.b;
+      pp.style.color=pal.ink; bd.appendChild(pp);
+      var tg=document.createElement("span"); tg.className="tag"; tg.style.color=pal.ink; tg.textContent="♪ phonon · tone "+(p.idx+1<10?"0":"")+(p.idx+1); bd.appendChild(tg);
+      el.appendChild(bd); deck.appendChild(el);
+    });
+    if(AUD) AUD.skin(pal);
+  }
+
+  function draw(){ if(st){ g.fillStyle=st.pal.bg; g.fillRect(0,0,W,H); g.globalAlpha=0.85; M(st.bgM,g,W,H,st.pal,rngFrom("phononic-core:"+st.seed+":bg"),t); g.globalAlpha=1; if(running)t++; } requestAnimationFrame(draw); }
+
+  // ── THE AUDIO LABS · real Web Audio ─────────────────────────────
+  var AUD=(function(){
+    var ROWS=5, STEPS=16;
+    var SCALE=[220.00, 261.63, 293.66, 329.63, 392.00];   // A-minor pentatonic, low→high
+    var grid=[]; for(var r=0;r<ROWS;r++){ grid.push([]); for(var c=0;c<STEPS;c++) grid[r].push(false); }
+    // a pleasant default riff (row index 0=lowest pitch)
+    [[0,0],[1,2],[2,4],[3,6],[4,8],[3,10],[2,12],[1,14],[4,4],[0,8]].forEach(function(p){ if(grid[p[0]]) grid[p[0]][p[1]]=true; });
+    var pal=null, AC=null, master=null, step=-1, timer=null, loops=0, tempo=150;
+    var f1=220, f2=226, osc1=null, osc2=null, oscGain=null, hearing=false, antiPhase=false;
+
+    function ensure(){ if(!AC){ var Ctx=window.AudioContext||window.webkitAudioContext; if(!Ctx) return null; AC=new Ctx(); master=AC.createGain(); master.gain.value=0.5; master.connect(AC.destination); } if(AC.state==="suspended") AC.resume(); var b=document.getElementById("snd"); if(b) b.textContent="🔊 sound on"; return AC; }
+    function note(freq,dur,when){ if(!AC) return; var o=AC.createOscillator(), gn=AC.createGain(); o.type="triangle"; o.frequency.value=freq;
+      var t0=when||AC.currentTime; gn.gain.setValueAtTime(0.0001,t0); gn.gain.exponentialRampToValueAtTime(0.22,t0+0.008); gn.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+      o.connect(gn).connect(master); o.start(t0); o.stop(t0+dur+0.03); }
+
+    // sequencer
+    var seqEl=document.getElementById("seq"), cells=[];
+    function build(){ if(!seqEl) return; seqEl.style.gridTemplateColumns="repeat("+STEPS+",1fr)"; seqEl.innerHTML=""; cells=[];
+      for(var r=0;r<ROWS;r++){ for(var c=0;c<STEPS;c++){ (function(r,c){ var d=document.createElement("div"); d.className="cell"; d.onclick=function(){ grid[r][c]=!grid[r][c]; paintCells(); ensure(); if(grid[r][c]) note(SCALE[r],0.25); }; seqEl.appendChild(d); cells.push({r:r,c:c,el:d}); })(r,c); } } }
+    function paintCells(){ if(!pal) return; for(var i=0;i<cells.length;i++){ var cc=cells[i], on=grid[cc.r][cc.c];
+        cc.el.style.background = on ? pal.colors[cc.r%pal.colors.length] : "rgba(255,255,255,0.05)";
+        cc.el.classList.toggle("col", cc.c===step); } }
+    function tick(){ step=(step+1)%STEPS; if(step===0) loops++;
+      for(var r=0;r<ROWS;r++){ if(grid[r][step]) note(SCALE[r],0.22); }
+      paintCells();
+      var rs=document.getElementById("rStep"),rl=document.getElementById("rLoop"); if(rs) rs.textContent=(step+1); if(rl) rl.textContent=loops; }
+    function play(){ if(timer){ stop(); return; } if(!ensure()) return; var b=document.getElementById("play"); if(b) b.textContent="⏸ stop";
+      var ms=function(){ return 60000/tempo/4; }; timer=setInterval(tick, ms()); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } step=-1; paintCells(); var b=document.getElementById("play"); if(b) b.textContent="▶ circulate"; }
+    function reTempo(){ if(timer){ clearInterval(timer); timer=setInterval(tick,60000/tempo/4); } }
+
+    // interferometer
+    var scope=document.getElementById("scope"), sctx=scope?scope.getContext("2d"):null, sw=600, sh=150;
+    function sfit(){ if(!scope) return; sw=scope.width=scope.clientWidth||600; sh=scope.height=150; }
+    function startHear(){ if(!ensure()) return; if(hearing){ stopHear(); return; }
+      oscGain=AC.createGain(); oscGain.gain.value=0.16; oscGain.connect(master);
+      osc1=AC.createOscillator(); osc1.type="sine"; osc1.frequency.value=f1;
+      osc2=AC.createOscillator(); osc2.type="sine"; osc2.frequency.value=antiPhase?f1:f2;
+      osc1.connect(oscGain); osc2.connect(oscGain); osc1.start(); osc2.start(); hearing=true;
+      var b=document.getElementById("hear"); if(b) b.textContent="⏸ stop tones"; }
+    function stopHear(){ try{ osc1&&osc1.stop(); osc2&&osc2.stop(); }catch(e){} osc1=osc2=null; hearing=false; var b=document.getElementById("hear"); if(b) b.textContent="▶ hear both"; }
+    function applyFreq(){ var rb=document.getElementById("rBeat"); if(rb) rb.textContent=antiPhase?0:Math.abs(f1-f2);
+      if(hearing){ if(osc1) osc1.frequency.setTargetAtTime(f1, AC.currentTime, 0.02); if(osc2) osc2.frequency.setTargetAtTime(antiPhase?f1:f2, AC.currentTime, 0.02); } }
+    function drawScope(){ if(!sctx||!pal){ requestAnimationFrame(drawScope); return; }
+      sctx.fillStyle=pal.bg; sctx.fillRect(0,0,sw,sh);
+      var c1=pal.colors[1]||"#34d0b8", c2=pal.colors[3]||"#9affe2", cs=pal.colors[4]||"#ffd66a";
+      var ph = antiPhase?Math.PI:0;
+      var k=0.045, off= (typeof t==="number"? t*0.06 : 0);     // scrolling phase for life
+      function trace(yc,amp,fn,col){ sctx.strokeStyle=col; sctx.globalAlpha=0.95; sctx.lineWidth=1.6; sctx.beginPath();
+        for(var x=0;x<=sw;x++){ var v=yc+amp*fn(x); x===0?sctx.moveTo(x,v):sctx.lineTo(x,v);} sctx.stroke(); sctx.globalAlpha=1; }
+      var A=sh*0.12;
+      trace(sh*0.20, A, function(x){ return Math.sin((x*k)*(f1/220)+off); }, c1);
+      trace(sh*0.50, A, function(x){ return Math.sin((x*k)*((antiPhase?f1:f2)/220)+off+ph); }, c2);
+      trace(sh*0.82, A*1.4, function(x){ return 0.5*(Math.sin((x*k)*(f1/220)+off)+Math.sin((x*k)*((antiPhase?f1:f2)/220)+off+ph)); }, cs);
+      requestAnimationFrame(drawScope); }
+
+    function skin(p){ pal=p; if(!cells.length) build(); paintCells(); sfit(); }
+
+    // wiring
+    var sb=document.getElementById("snd"); if(sb) sb.onclick=ensure;
+    var pb=document.getElementById("play"); if(pb) pb.onclick=play;
+    var rnd=document.getElementById("rnd"); if(rnd) rnd.onclick=function(){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=Math.random()<0.16; paintCells(); };
+    var wp=document.getElementById("wipe"); if(wp) wp.onclick=function(){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=false; paintCells(); };
+    var tp=document.getElementById("tempo"); if(tp) tp.oninput=function(){ tempo=parseInt(this.value,10); reTempo(); };
+    var hb=document.getElementById("hear"); if(hb) hb.onclick=startHear;
+    var cb=document.getElementById("cancel"); if(cb) cb.onclick=function(){ antiPhase=!antiPhase; this.style.filter=antiPhase?"brightness(0.8)":""; applyFreq(); };
+    var s1=document.getElementById("f1"); if(s1) s1.oninput=function(){ f1=parseInt(this.value,10); applyFreq(); };
+    var s2=document.getElementById("f2"); if(s2) s2.oninput=function(){ f2=parseInt(this.value,10); antiPhase=false; var cbx=document.getElementById("cancel"); if(cbx) cbx.style.filter=""; applyFreq(); };
+    window.addEventListener("resize",function(){ sfit(); });
+    build(); requestAnimationFrame(drawScope);
+    return { skin:skin };
+  })();
+
+  function newSeed(){ return Math.floor(Math.random()*1e9); }
+  function readSeed(){ var h=(location.hash||"").replace(/^#/,"").replace(/^seed=/,""); var n=parseInt(h,10); return (h&&!isNaN(n))?n:null; }
+  function go(seed){ history.replaceState(null,"","#"+seed); setup(seed); }
+  document.getElementById("reroll").onclick=function(){ go(newSeed()); };
+  document.getElementById("perma").onclick=function(){ var url=location.origin+location.pathname+"#"+st.seed; (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){ flash("copied permalink ✓"); },function(){ prompt("permalink:",url); }); };
+  document.getElementById("motion").onclick=function(){ running=!running; this.textContent=running?"⏸ motion":"▶ motion"; };
+  function flash(m){ var r=document.getElementById("read"),o=r.textContent; r.textContent=m; setTimeout(function(){ r.textContent=o; },1300); }
+  window.addEventListener("hashchange",function(){ var s=readSeed(); if(s!==null&&(!st||s!==st.seed)) setup(s); });
+  var rt; window.addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(function(){ fit(); if(st) setup(st.seed); },170); });
+
+  fit();
+  var s0=readSeed(); if(s0===null){ s0=newSeed(); history.replaceState(null,"","#"+s0); }
+  setup(s0); draw();
+})();
+</script>
+</body>
+</html>
