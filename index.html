@@ -37,11 +37,16 @@
   .lab .rd{opacity:.9}.lab .rd b{color:#9affe2}
   .lab .lg{font-size:11px;opacity:.6;padding:0 15px 13px;font-family:'Space Mono',monospace;line-height:1.6}
   #snd{font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;color:#04100d;background:#ffd66a;border:none;border-radius:6px;padding:4px 12px;font-weight:700}
-  #seqwrap{padding:8px 15px 4px}
-  #seq{display:grid;gap:4px}
-  #seq .cell{aspect-ratio:1/1;border-radius:5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);cursor:pointer;transition:transform .05s}
-  #seq .cell:hover{transform:scale(1.08)}
-  #seq .cell.col{outline:2px solid rgba(255,255,255,0.85);outline-offset:-1px}
+  #seqwrap{padding:6px 15px 4px}
+  #seq{display:grid;gap:2px;grid-auto-rows:13px}
+  #seq .cell{border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:transform .05s,box-shadow .05s}
+  #seq .cell:hover{transform:scale(1.12)}
+  #seq .cell.col{outline:1px solid rgba(255,255,255,0.85);outline-offset:-1px}
+  #tunes{display:flex;flex-wrap:wrap;gap:6px;padding:4px 15px 8px}
+  #tunes button{font-family:'Space Mono',monospace;font-size:11px;cursor:pointer;color:#04100d;background:#9affe2;border:none;border-radius:6px;padding:4px 9px;font-weight:700}
+  #tunes button:hover{filter:brightness(1.1)}
+  #tunes button.sel{outline:2px solid #fff;outline-offset:1px}
+  #tunes .tcap{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.6;align-self:center;margin-right:2px}
   #optic{padding:2px 15px 6px;display:flex;align-items:center;gap:10px}
   #optic .ocap{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;opacity:.6;white-space:nowrap}
   #colorbar{flex:1;height:22px;border-radius:6px;background:#05080a;transition:background .07s linear,box-shadow .07s linear;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12)}
@@ -98,7 +103,8 @@
   <!-- LAB 1: recirculating delay-line memory, as music -->
   <div class="lab" id="lab1">
     <div class="lh"><span>▶ THE DELAY LINE · a recirculating acoustic memory, played as music</span><button id="snd">🔊 enable sound</button></div>
-    <div class="ll">A bit in a delay-line memory exists only while it is <b>moving</b> — it circulates as a pulse and must loop back to refresh, or it's gone. This is exactly how <b>UNIVAC I (1951)</b> held its memory: trains of sound pulses in tubes of mercury. Here each lit cell is a pulse, mapped to a note of a pentatonic scale (so any pattern is musical). Hit <b>play</b> and your byte <b>circulates</b> — a melody that is also a memory refreshing.</div>
+    <div class="ll">A bit in a delay-line memory exists only while it is <b>moving</b> — it circulates as a pulse and must loop back to refresh, or it's gone. This is exactly how <b>UNIVAC I (1951)</b> held its memory: trains of sound pulses in tubes of mercury. Here the grid is a 16×16 piano-roll of pulses played as <b>8-bit square waves</b>. Pick a <b>tune</b> and the bits <b>auto-arrange</b> into its shape; or draw your own and hit <b>play</b> to circulate it. The presets are <b>public-domain</b> melodies — several made famous by games (Korobeiniki <i>is</i> the Tetris theme) — synthesized here, not the copyrighted soundtracks.</div>
+    <div id="tunes"></div>
     <div id="seqwrap"><div id="seq"></div></div>
     <div id="optic"><span class="ocap">▤ OPTICAL CHANNEL</span><div id="colorbar"></div><span id="chan">λ <b id="rWL">—</b></span></div>
     <div class="ctl">
@@ -164,6 +170,9 @@
     {h:"One Octave Of Light", b:"Why a tone HAS a color here: the visible spectrum is almost exactly one octave — red to violet, 760 to 380 nm, a clean 2:1 in frequency, just like a musical octave. So a note maps to a color simply by raising it ~40 octaves until it glows; octave equivalence (a note is 'the same' an octave up) makes the pairing principled, not arbitrary. Real correspondence; the exact hue is a chosen convention."},
     {h:"Color As A Lane (WDM)", b:"And color really is a data channel: wavelength-division multiplexing runs dozens of colors down one fibre at once, each an independent stream — the backbone of the internet. 'Add a color channel' is not a metaphor; it is how the network you are reading this on moves its bits."},
     {h:"◐ Two Channels, One Word", b:"The ROOT0 layer, flagged as concept: this core emits each word on BOTH lanes at once — a tone for the ear and its spectral color for the eye — coupled by the acousto-optic effect so they stay in lockstep. Redundant encoding across senses. The parts are real (acousto-optics + WDM); wiring them as one chip's dual output is the design."},
+    {h:"The Square Wave", b:"The 8-bit voice you are hearing: a square (pulse) wave, the signature timbre of the NES and Game Boy sound chips. Its buzzy, harmonic-rich edge is what 'chiptune' means — a single oscillator flipping between two levels, the cheapest possible note and the sound of an era."},
+    {h:"◆ Public-Domain Chiptunes", b:"The presets are honestly clean: Korobeiniki (the Tetris theme) is an 1861 Russian folk song; Für Elise and Ode to Joy are Beethoven; Twinkle is an 18th-century air Mozart varied; Frère Jacques and Jingle Bells are folk standards. All public domain — several made iconic BY games. Synthesized here as square waves, not the copyrighted soundtracks. Render-not-rip."},
+    {h:"The Bits Arrange Themselves", b:"Pick a tune and watch the memory grid auto-fill into the melody's piano-roll silhouette: the data becomes the music and the music becomes the data — a recirculating delay line whose stored byte you can hum. The thesis, closed: in this core, a song and a memory are the same object."},
     {h:"Slow, And Proud Of It", b:"Sound crawls — roughly a hundred thousand times slower than light. That sounds like a flaw, but slowness is the feature: it is what lets a tiny chip hold a long delay, a precise filter, a circulating memory. The core trades speed for time itself."},
     {h:"◐ The Scaled Core", b:"The ROOT0 layer, flagged as concept: SAW waveguides as buses, phononic-crystal gates as logic, and delay lines as registers, integrated on one piezo die with IDT I/O. A coherent design on real, shipped primitives — not a fabricated general processor."},
     {h:"◐ A Rung In The Lattice", b:"Where it sits: an acoustic sibling to [[electromagnetic-processor]] — both compute with waves and interference, but EMC's spin waves are silent and this one is audible. The only seat in PSĒPHOS you experience with your ears."},
@@ -255,11 +264,21 @@
 
   // ── THE AUDIO LABS · real Web Audio ─────────────────────────────
   var AUD=(function(){
-    var ROWS=5, STEPS=16;
-    var SCALE=[220.00, 261.63, 293.66, 329.63, 392.00];   // A-minor pentatonic, low→high
+    var ROWS=16, STEPS=16;
+    var SCALE=[]; for(var _r=0;_r<ROWS;_r++) SCALE.push(329.63*Math.pow(2,_r/12));   // chromatic E4 → G5 (equal temperament)
     var grid=[]; for(var r=0;r<ROWS;r++){ grid.push([]); for(var c=0;c<STEPS;c++) grid[r].push(false); }
-    // a pleasant default riff (row index 0=lowest pitch)
-    [[0,0],[1,2],[2,4],[3,6],[4,8],[3,10],[2,12],[1,14],[4,4],[0,8]].forEach(function(p){ if(grid[p[0]]) grid[p[0]][p[1]]=true; });
+    // PUBLIC-DOMAIN tunes (row 0=low E4 … 15=high G5; -1=rest) — synthesized 8-bit, IP-clean (not the games' soundtracks)
+    var TUNES=[
+      {n:"Korobeiniki · Tetris", s:[12,7,8,10,8,7,5,5, 8,12,10,8,7,7,8,10]},
+      {n:"Für Elise · Tetris GB", s:[12,11,12,11,12,7,10,8, 5,-1,12,11,12,11,12,7]},
+      {n:"Ode to Joy", s:[12,12,13,15,15,13,12,10, 8,8,10,12,12,10,10,-1]},
+      {n:"Twinkle · Mozart", s:[5,5,12,12,14,14,12,-1, 10,10,9,9,7,7,5,-1]},
+      {n:"Frère Jacques", s:[8,10,12,8, 8,10,12,8, 12,13,15,-1, 12,13,15,-1]},
+      {n:"Jingle Bells", s:[12,12,12,-1, 12,12,12,-1, 12,15,8,10, 12,-1,-1,-1]}
+    ];
+    function loadTune(s){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=false;
+      for(var c2=0;c2<STEPS;c2++){ var row=s[c2]; if(row>=0&&row<ROWS) grid[row][c2]=true; } paintCells(); }
+    loadTune(TUNES[0].s);   // open on the Tetris theme
     var pal=null, AC=null, master=null, step=-1, timer=null, loops=0, tempo=150;
     var f1=220, f2=226, osc1=null, osc2=null, oscGain=null, hearing=false, antiPhase=false;
 
@@ -280,8 +299,8 @@
       return [Math.min(255,r),Math.min(255,g),Math.min(255,b)]; }
 
     function ensure(){ if(!AC){ var Ctx=window.AudioContext||window.webkitAudioContext; if(!Ctx) return null; AC=new Ctx(); master=AC.createGain(); master.gain.value=0.5; master.connect(AC.destination); } if(AC.state==="suspended") AC.resume(); var b=document.getElementById("snd"); if(b) b.textContent="🔊 sound on"; return AC; }
-    function note(freq,dur,when){ if(!AC) return; var o=AC.createOscillator(), gn=AC.createGain(); o.type="triangle"; o.frequency.value=freq;
-      var t0=when||AC.currentTime; gn.gain.setValueAtTime(0.0001,t0); gn.gain.exponentialRampToValueAtTime(0.22,t0+0.008); gn.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    function note(freq,dur,when){ if(!AC) return; var o=AC.createOscillator(), gn=AC.createGain(); o.type="square"; o.frequency.value=freq;   // square = the classic 8-bit pulse voice
+      var t0=when||AC.currentTime; gn.gain.setValueAtTime(0.0001,t0); gn.gain.exponentialRampToValueAtTime(0.16,t0+0.006); gn.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
       o.connect(gn).connect(master); o.start(t0); o.stop(t0+dur+0.03); }
 
     // sequencer
@@ -304,6 +323,16 @@
       var ms=function(){ return 60000/tempo/4; }; timer=setInterval(tick, ms()); }
     function stop(){ if(timer){ clearInterval(timer); timer=null; } step=-1; paintCells(); var b=document.getElementById("play"); if(b) b.textContent="▶ circulate"; }
     function reTempo(){ if(timer){ clearInterval(timer); timer=setInterval(tick,60000/tempo/4); } }
+
+    // ── the 8-bit tune picker · the bits auto-arrange to a chosen melody ──
+    var tunesEl=document.getElementById("tunes");
+    function buildTunes(){ if(!tunesEl) return; tunesEl.innerHTML="";
+      var cap=document.createElement("span"); cap.className="tcap"; cap.textContent="♪ 8-BIT TUNES (public domain):"; tunesEl.appendChild(cap);
+      TUNES.forEach(function(tn){ var b=document.createElement("button"); b.textContent=tn.n;
+        b.onclick=function(){ loadTune(tn.s); ensure(); if(!timer) play();
+          Array.prototype.forEach.call(tunesEl.querySelectorAll("button"),function(x){ x.classList.remove("sel"); }); b.classList.add("sel"); };
+        tunesEl.appendChild(b); });
+      var first=tunesEl.querySelector("button"); if(first) first.classList.add("sel"); }
 
     // interferometer
     var scope=document.getElementById("scope"), sctx=scope?scope.getContext("2d"):null, sw=600, sh=150;
@@ -336,7 +365,8 @@
     // wiring
     var sb=document.getElementById("snd"); if(sb) sb.onclick=ensure;
     var pb=document.getElementById("play"); if(pb) pb.onclick=play;
-    var rnd=document.getElementById("rnd"); if(rnd) rnd.onclick=function(){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=Math.random()<0.16; paintCells(); };
+    var rnd=document.getElementById("rnd"); if(rnd) rnd.onclick=function(){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=false;
+      var penta=[0,3,5,7,8,10,12,15]; for(var c2=0;c2<STEPS;c2++){ if(Math.random()<0.75) grid[penta[Math.floor(Math.random()*penta.length)]][c2]=true; } paintCells(); };
     var wp=document.getElementById("wipe"); if(wp) wp.onclick=function(){ for(var r=0;r<ROWS;r++)for(var c=0;c<STEPS;c++) grid[r][c]=false; paintCells(); };
     var tp=document.getElementById("tempo"); if(tp) tp.oninput=function(){ tempo=parseInt(this.value,10); reTempo(); };
     var hb=document.getElementById("hear"); if(hb) hb.onclick=startHear;
@@ -344,7 +374,7 @@
     var s1=document.getElementById("f1"); if(s1) s1.oninput=function(){ f1=parseInt(this.value,10); applyFreq(); };
     var s2=document.getElementById("f2"); if(s2) s2.oninput=function(){ f2=parseInt(this.value,10); antiPhase=false; var cbx=document.getElementById("cancel"); if(cbx) cbx.style.filter=""; applyFreq(); };
     window.addEventListener("resize",function(){ sfit(); });
-    build(); requestAnimationFrame(drawScope);
+    build(); buildTunes(); requestAnimationFrame(drawScope);
     return { skin:skin };
   })();
 
